@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>write</title>
+</head>
+<style>
+    body{
+        background: linear-gradient(to bottom right, #F6D9F5, #CAE9FD);
+        height: 100vh;
+    }
+</style>
+<body>
+    <section class="bg-white/50 w-[900px] mx-auto mt-20 rounded-lg pt-2 pb-10">
+        <div class="flex items-center justify-between py-2 px-4">
+            <h3 class="text-3xl font-light">BOARD</h3>
+            <a href="/list" class="bg-gray-300 px-8 rounded-lg flex items-center text-white h-[30px]">List</a>
+        </div>
+        <p class="px-4">This is a crud test to demonstrate my capabilities using Spring Boot.</p>
+        <form action="/write", method="post" class="mb-10">
+            <table  class=" w-[900px] mt-5 mb-8">
+                <tbody>
+                    <tr class="mt-2 flex flex-col px-4">
+                        <td class="ml-2">Title</td>
+                        <td><input class="bg-white/50 w-full h-[40px] rounded indent-4" type="text" name="title"/></td>
+                    </tr>
+                    <tr class="mt-2 flex flex-col px-4">
+                        <td class="ml-2">Content</td>
+                        <td><textarea class="w-full min-h-[200px] bg-white/50 rounded resize-none p-2" name="content"></textarea></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class=" float-right mr-4 bg-blue-600 px-6 rounded-lg flex items-center text-white h-[30px]">Post</button>
+        </form>
+    </section>
+</body>
+</html>
