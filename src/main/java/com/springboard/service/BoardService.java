@@ -8,6 +8,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -19,11 +20,21 @@ public class BoardService {
     private final BoardRepository boardRepository;
 
 
-    public Page<Board> readPosts(int page) {
-        Pageable pageable = PageRequest.of(page, 5);
+    public Page<BoardDTO> readPosts(int page) {
+        Pageable pageable = PageRequest.of(page, 5, Sort.Direction.DESC, "id");
         Page<Board> posts = boardRepository.findAll(pageable);
         log.info("게시글 목록 서비스 "+posts);
-        return posts;
+        Page<BoardDTO> dtos = posts.map(board -> {
+            BoardDTO dto = BoardDTO
+                    .builder()
+                    .title(board.getTitle())
+                    .content(board.getContent())
+                    .id(board.getId())
+                    .build();
+            log.info(dto.toString());
+            return dto;
+        });
+        return dtos;
     }
 
     public void createPost(BoardDTO boardDTO) {

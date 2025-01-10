@@ -21,6 +21,7 @@ public class BoardDTO {
     private String regIp;
     private int comments;
     private int views;
+    private int index;
 
     @CreationTimestamp
     private LocalDateTime regDate;

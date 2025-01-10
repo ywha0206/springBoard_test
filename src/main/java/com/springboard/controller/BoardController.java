@@ -12,6 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
+import java.util.Collections;
+
 @Log4j2
 @RequiredArgsConstructor
 @Controller
@@ -20,7 +23,8 @@ public class BoardController {
 
     @GetMapping({"/","/list"})
     public String list(@RequestParam(value = "page", defaultValue = "0") int page, Model model) {
-        Page<Board> posts = boardService.readPosts(page);
+        Page<BoardDTO> posts = boardService.readPosts(page);
+
         model.addAttribute("posts", posts);
         model.addAttribute("page", page);
         model.addAttribute("totalPages", posts.getTotalPages());
@@ -42,8 +46,8 @@ public class BoardController {
         return "redirect:/list";
     }
 
-    @GetMapping("/modify/{id}")
-    public String modify(@PathVariable("id") int id, Model model) {
+    @GetMapping("/modify")
+    public String modify(@RequestParam(value = "id") int id, Model model) {
         log.info("수정할 글 번호 "+id);
         BoardDTO board = boardService.readPost(id);
         model.addAttribute("board", board);
